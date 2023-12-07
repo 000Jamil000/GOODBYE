@@ -7,11 +7,11 @@ const Passenger = sequelize.define('passenger', {
         primaryKey: true, 
         autoIncrement: true
     },
-    FullName: {
+    full_name: {
         type: DataTypes.STRING,
         allowNull: false 
     },
-    PassportData: {
+    passport_data: {
         type: DataTypes.INTEGER,
         unique: true,
         allowNull: false 
@@ -21,8 +21,9 @@ const Passenger = sequelize.define('passenger', {
         unique: true,
         allowNull: false
     }
-
-})
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+});
 
 const Purchase = sequelize.define('purchase', {
     id: { 
@@ -30,11 +31,13 @@ const Purchase = sequelize.define('purchase', {
         primaryKey: true, 
         autoIncrement: true 
     },
-    ticketId: { 
+    ticket_id: { 
         type: DataTypes.INTEGER,
         primaryKey: true, 
     }
-})
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+});
 
 const Ticket = sequelize.define('ticket', {
     id: { 
@@ -42,15 +45,15 @@ const Ticket = sequelize.define('ticket', {
         primaryKey: true, 
         autoIncrement: true 
     },
-    Memberid: { 
+    member_id: { 
         type: DataTypes.STRING,
         unique: true
     },
-    flightNumber: { 
+    flight_number: { 
         type: DataTypes.STRING,
         unique: true 
     },
-    seatNumber: { 
+    seat_number: { 
         type: DataTypes.STRING,
         unique: true,
         allowNull: false
@@ -58,11 +61,13 @@ const Ticket = sequelize.define('ticket', {
     cost: { 
         type: DataTypes.FLOAT 
     },
-    airplaneNumber: { 
+    airplane_number: { 
         type: DataTypes.STRING, 
         unique: true
     }
-})
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+});
 
 const Airplane = sequelize.define('airplane', {
     id: { 
@@ -70,7 +75,7 @@ const Airplane = sequelize.define('airplane', {
         primaryKey: true, 
         autoIncrement: true 
     },
-    airplaneNumber: { 
+    airplane_number: { 
         type: DataTypes.STRING,
         unique: true 
     },
@@ -80,26 +85,29 @@ const Airplane = sequelize.define('airplane', {
     year: { 
         type: DataTypes.INTEGER 
     }
-})
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+});
 
 const Flight = sequelize.define('flight', {
-    flightNumber: { 
+    flight_number: { 
         type: DataTypes.STRING, 
         primaryKey: true,
         unique: true 
     },
-    departureDateTime: { 
+    departure_date_time: { 
         type: DataTypes.DATE 
     },
-    departurePlace: { 
+    departure_place: { 
         type: DataTypes.STRING 
     },
-    airplaneNumber: { 
+    airplane_number: { 
         type: DataTypes.STRING,
         unique: true 
     }
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
 });
-
 
 Passenger.hasMany(Purchase);
 Purchase.belongsTo(Passenger);

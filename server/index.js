@@ -4,17 +4,16 @@ const sequelize = require('./db')
 const models = require('./models/models.js')
 const PORT = process.env.PORT || 3000
 const router = require('./routes/index.js')
-
+const pullTable = require('./pullTable.js')
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.status(200).json({message: 'sdfsfsdfs'})
-})
+
 
 app.use('/api', router)
 
 const start = async () => {
+
     try{
         await sequelize.authenticate()
         await sequelize.sync()
@@ -25,6 +24,7 @@ const start = async () => {
     }
     
 }
+
 
 
 start()
