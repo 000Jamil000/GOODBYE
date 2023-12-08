@@ -3,6 +3,6 @@ const  router = new Router
 const searchController = require('../controllers/serchController')
 
 
-router.get('/get', searchController.getAll)
+router.get('/get', searchController.getByCityAndDate)
 
 module.exports = router

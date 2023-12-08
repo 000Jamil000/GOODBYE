@@ -45,10 +45,6 @@ const Ticket = sequelize.define('ticket', {
         primaryKey: true, 
         autoIncrement: true 
     },
-    member_id: { 
-        type: DataTypes.STRING,
-        unique: true
-    },
     flight_number: { 
         type: DataTypes.STRING,
         unique: true 
@@ -64,10 +60,62 @@ const Ticket = sequelize.define('ticket', {
     airplane_number: { 
         type: DataTypes.STRING, 
         unique: true
+    },
+    from_city: { 
+        type: DataTypes.STRING 
+    },
+    to_city: { 
+        type: DataTypes.STRING 
+    },
+    departure_date: { 
+        type: DataTypes.DATE 
+    },
+    arrival_date: { 
+        type: DataTypes.DATE 
+    },
+    departure_time: { 
+        type: DataTypes.TIME 
+    },
+    arrival_time: { 
+        type: DataTypes.TIME 
     }
+    
 }, {
     timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
 });
+
+
+
+
+// const Ticket = sequelize.define('ticket', {
+//     id: { 
+//         type: DataTypes.INTEGER, 
+//         primaryKey: true, 
+//         autoIncrement: true 
+//     },
+//     member_id: { 
+//         type: DataTypes.STRING,
+//         unique: true
+//     },
+//     flight_number: { 
+//         type: DataTypes.STRING,
+//         unique: true 
+//     },
+//     seat_number: { 
+//         type: DataTypes.STRING,
+//         unique: true,
+//         allowNull: false
+//     },
+//     cost: { 
+//         type: DataTypes.FLOAT 
+//     },
+//     airplane_number: { 
+//         type: DataTypes.STRING, 
+//         unique: true
+//     }
+// }, {
+//     timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+// });
 
 const Airplane = sequelize.define('airplane', {
     id: { 
