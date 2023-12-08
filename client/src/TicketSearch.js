@@ -25,40 +25,70 @@ function TicketSearch() {
     }
   };
 
+  const getTickets = (from, to, startDate, endDate) => {
+    fetch(`http://localhost:5000/api/searchRouters/get?from=${from}&to=${to}&startDate=${startDate}&endDate=${endDate}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Билеты:', data);
+  
+        // Отображение билетов на странице
+        const ticketList = document.getElementById('ticket-list');
+        ticketList.innerHTML = ''; // Очистить содержимое перед обновлением
+  
+        data.forEach((ticket) => {
+          const ticketItem = document.createElement('div');
+          ticketItem.classList.add('ticket-item');
+  
+          const departureCity = document.createElement('p');
+          departureCity.textContent = `Город отправления: ${ticket.departure_city}`;
+          ticketItem.appendChild(departureCity);
+  
+          const arrivalCity = document.createElement('p');
+          arrivalCity.textContent = `Город прибытия: ${ticket.arrival_city}`;
+          ticketItem.appendChild(arrivalCity);
+  
+          // Добавьте другие данные о билете аналогичным образом
+  
+          ticketList.appendChild(ticketItem);
+        });
+      })
+      .catch((error) => {
+        console.error('Ошибка:', error);
+      });
+  };
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Добавьте здесь вашу логику для обработки данных формы
-    console.log('Отправка данных:', text1, text2, selectedStartDate, selectedEndDate);
+    getTickets(text1, text2, selectedStartDate, selectedEndDate);
   };
 
   return (
     <div className="container">
-      <img src="./assets/white-airplane.svg" alt="" className="logo" />
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Откуда" value={text1} onChange={(e) => setText1(e.target.value)} className="inputField" />
         <input type="text" placeholder="Куда" value={text2} onChange={(e) => setText2(e.target.value)} className="inputField" />
         <div className="datePickerContainer">
-        <DatePicker
-        selected={selectedStartDate}
-        onChange={handleStartDateChange}
-        dateFormat="dd/MM/yyyy"
-        placeholderText="Начальная дата"
-        isClearable={true}
-        showYearDropdown={true}
-        className="datePicker"
-      />
-
-        <DatePicker
-          selected={selectedEndDate}
-          onChange={handleEndDateChange}
-          dateFormat="dd/MM/yyyy"
-          placeholderText="Конечная дата"
-          isClearable={true}
-          showYearDropdown={true}
-          minDate={selectedStartDate}
-          className="datePicker"
-        />
-          </div>
+          <DatePicker
+            selected={selectedStartDate}
+            onChange={handleStartDateChange}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Начальная дата"
+            isClearable={true}
+            showYearDropdown={true}
+            className="datePicker"
+          />
+          <DatePicker
+            selected={selectedEndDate}
+            onChange={handleEndDateChange}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Конечная дата"
+            isClearable={true}
+            showYearDropdown={true}
+            minDate={selectedStartDate}
+            className="datePicker"
+          />
+        </div>
         <button type="submit" className="submitButton">Найти билеты</button>
       </form>
     </div>

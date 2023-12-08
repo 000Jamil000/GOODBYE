@@ -1,26 +1,30 @@
-const ApiError = require('../error/ApiError')
-const{Ticket} = require('../models/models')
+const ApiError = require('../error/ApiError');
+const { Ticket } = require('../models/models');
 
-class searchController {
+
+
+class SearchController {
     async getByCityAndDate(req, res) {
-      const { fromCity, toCity, date } = req.query;
-  
-      try {
-        const tickets = await Ticket.findAll({
-          where: {
-            fromCity,
-            toCity,
-            departureDate: date, // предположим, что в вашей таблице есть поля fromCity, toCity и departureDate для соответствующих значений
-          },
-          attributes: ['fromCity', 'toCity', 'departureDate', 'arrivalDate', 'departureTime', 'arrivalTime'], // Выбираем только необходимые столбцы
-        });
-  
-        return res.json(tickets);
-      } catch (error) {
-        return res.status(500).json({ error: 'Ошибка при выполнении запроса' });
+        const { fromCity, toCity, startDate, endDate } = req.query;
+      
+        try {
+          const tickets = await Ticket.findAll({
+            where: {
+              from_city: fromCity,
+              to_city: toCity,
+              departure_date: startDate,
+              arrival_date: endDate
+            },
+            attributes: ['from_city', 'to_city', 'departure_date', 'arrival_date', 'departure_time', 'arrival_time']
+          });
+      
+          return res.json(tickets);
+        } catch (error) {
+          console.error('Ошибка:', error);    
+          return res.status(500).json({ error: 'Ошибка при выполнении запроса' });
+        }
       }
-    }
-  }
-  
+      
+}
 
-module.exports = new searchController()
+module.exports = new SearchController();
