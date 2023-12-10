@@ -16,6 +16,7 @@ body {
     color: white;
     border: none;
     margin: 0;
+    
   }
   
 .inputField {
@@ -44,6 +45,7 @@ body {
   }
   
 .submitButton {
+    font-family: Roboto;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -66,4 +68,12 @@ body {
     left: 10px; 
     width: 100px; 
     height: 100px; 
+  }
+  .text{
+    position: absolute;
+    top: 5px; 
+    left: 100px; 
+    font-family: Sofia Sans;
+    font-size: 10px;
+    font-weight: 300;
   }

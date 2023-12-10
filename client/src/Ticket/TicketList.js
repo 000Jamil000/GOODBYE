@@ -1,9 +1,8 @@
-// TicketList.js
 import React from 'react';
 
 class TicketList extends React.Component {
     render() {
-      const { tickets } = this.props;
+      const { tickets, switchToForm } = this.props;
   
       // Проверка наличия билетов
       const hasTickets = tickets && tickets.length > 0;
@@ -24,6 +23,9 @@ class TicketList extends React.Component {
           ) : (
             <p>Нет доступных билетов</p>
           )}
+          <button onClick={switchToForm}>
+            Вернуться к форме
+          </button>
         </div>
       );
     }
