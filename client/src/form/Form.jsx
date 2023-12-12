@@ -22,11 +22,11 @@ function Form(props) {
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
 
-    const getTickets = useCallback((from, to, startDate, endDate) => {
+    const getTickets = useCallback((from, to, startDate, endDate, cost) => {
         const convertedStartDate = convertDate(startDate)
         const convertedEndDate = convertDate(endDate)
        
-        fetch(`http://localhost:5000/api/searchRouters/get?fromCity=${from}&toCity=${to}&startDate=${convertedStartDate}&endDate=${convertedEndDate}`)
+        fetch(`http://localhost:5000/api/searchRouters/get?fromCity=${from}&toCity=${to}&startDate=${convertedStartDate}&endDate=${convertedEndDate}&price=${cost}`)
           .then((response) => response.json())
           .then((data) => {
             console.log('Билеты:', data);
@@ -63,7 +63,7 @@ function Form(props) {
         <div className="container">
         <form onSubmit={handleSubmit}>
           <div className='text'>
-          <h1 >GoodBye</h1>
+          <h1>GoodBye</h1>
           </div>
             <img src={logo} alt="GoodBye" className='logo' ></img>
           <input

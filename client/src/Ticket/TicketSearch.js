@@ -19,7 +19,7 @@ const TicketSearch = () => {
         <TicketList
             tickets={tickets}
             switchToForm={() => setSelectedTab('form')}
-        />
+        />  
       )}
     </div>
   );

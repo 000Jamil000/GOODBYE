@@ -7,7 +7,7 @@ body {
   }
 
 .container {
-    background-color: #1E1E1E;
+    background-color: #141414;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -66,13 +66,12 @@ body {
     position: absolute;
     top: 10px; 
     left: 10px; 
-    width: 100px; 
-    height: 100px; 
+    width: 50px;
   }
   .text{
     position: absolute;
-    top: 5px; 
-    left: 100px; 
+    top: 10px; 
+    left: 70px; 
     font-family: Sofia Sans;
     font-size: 10px;
     font-weight: 300;

@@ -78,6 +78,12 @@ const Ticket = sequelize.define('ticket', {
     },
     arrival_time: { 
         type: DataTypes.TIME 
+    },
+    departure_time_back: { 
+        type: DataTypes.TIME 
+    },  
+    arrival_time_back: { 
+        type: DataTypes.TIME 
     }
     
 }, {

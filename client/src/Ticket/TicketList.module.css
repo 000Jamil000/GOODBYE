@@ -1,0 +1,122 @@
+/* TicketList.module.css */
+
+* {
+  font-family: Roboto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #141414;
+  height: 100vh;
+}
+
+
+
+.ticket {
+  background: #242528;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+  transform-origin: center;
+}
+
+.ticket:hover {
+    transform: scale(1.05);
+  }
+
+.logo {
+  width: 50px;
+  cursor: pointer;
+}
+
+.ticket__price {
+
+  color: #fff;
+  font-size: 24px;
+}
+
+.button_for_bye_ticket {
+
+  padding: 8px 9px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 50px;
+  position: absolute;
+  bottom: 30px ;
+  left: 30px;
+
+}
+
+
+.ticket_data_item:first-child{
+    text-align: center;
+    align-self: center;
+}
+
+.ticket_data_item{
+  color: #fff;
+  padding: 10px;
+}
+
+.ticket_data_of_city{
+    margin-bottom: 10px;
+    text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.ticket_date{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.ticket_time{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.ticket_data_time_text {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+
+.no_tickets {
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+
+.ticket_logo{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-image: url('../assets/Rectangle 10.png');
+    padding: 1px;
+    background-size: calc(100% + 5px);
+    border-radius: 5px;
+
+}
