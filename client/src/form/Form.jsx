@@ -26,7 +26,7 @@ function Form(props) {
         const convertedStartDate = convertDate(startDate)
         const convertedEndDate = convertDate(endDate)
        
-        fetch(`http://localhost:5000/api/searchRouters/get?fromCity=${from}&toCity=${to}&startDate=${convertedStartDate}&endDate=${convertedEndDate}&price=${cost}`)
+        fetch(`http://localhost:5000/api/searchRouters?fromCity=${from}&toCity=${to}&startDate=${convertedStartDate}&endDate=${convertedEndDate}&price=${cost}`)
           .then((response) => response.json())
           .then((data) => {
             console.log('Билеты:', data);

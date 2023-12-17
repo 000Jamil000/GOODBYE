@@ -1,43 +1,60 @@
 const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
 
+const User = sequelize.define('User',{
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true, 
+        autoIncrement: true
+    },
+    email: {
+        type: DataTypes.STRING, 
+        unique: true,
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    role: {
+        type: DataTypes.STRING, 
+        defaultValue: "USER"
+    },
+})
+
 const Passenger = sequelize.define('passenger', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true, 
         autoIncrement: true
     },
+
+
     full_name: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: true 
     },
     passport_data: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         unique: true,
-        allowNull: false 
+        allowNull: true 
     },
-    email: {
-        type: DataTypes.STRING, 
-        unique: true,
-        allowNull: false
+    dateOfBirth: {
+        type: DataTypes.DATEONLY, // Используем DATEONLY для хранения только даты без времени
+        allowNull: true
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: User,
+            key: 'id'
+        }
     }
+    
 }, {
     timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
 });
 
-const Purchase = sequelize.define('purchase', {
-    id: { 
-        type: DataTypes.INTEGER, 
-        primaryKey: true, 
-        autoIncrement: true 
-    },
-    ticket_id: { 
-        type: DataTypes.INTEGER,
-        primaryKey: true, 
-    }
-}, {
-    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
-});
 
 const Ticket = sequelize.define('ticket', {
     id: { 
@@ -84,6 +101,14 @@ const Ticket = sequelize.define('ticket', {
     },  
     arrival_time_back: { 
         type: DataTypes.TIME 
+    },
+    passenger_id: {
+        type: DataTypes.INTEGER,
+
+        references: {
+          model: Passenger, // Имя связываемой таблицы
+          key: 'id', // Поле в связываемой таблице
+        },
     }
     
 }, {
@@ -160,17 +185,17 @@ const Flight = sequelize.define('flight', {
         unique: true 
     }
 }, {
-    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+    timestamps: false 
 });
 
-Passenger.hasMany(Purchase);
-Purchase.belongsTo(Passenger);
+Ticket.belongsTo(Passenger, {
+    foreignKey: 'passenegr_id', 
+    as: 'passenger', 
+  });
+  
+Passenger.belongsTo(User, { foreignKey: 'userId' }); 
+User.hasOne(Passenger, { foreignKey: 'userId' });
 
-// Покупка <-> Билет (многие к одному)
-Purchase.belongsTo(Ticket);
-Ticket.hasMany(Purchase);
-
-// Билет <-> Рейс (многие к одному)
 Ticket.belongsTo(Flight);
 Flight.hasMany(Ticket);
 
@@ -183,8 +208,8 @@ Airplane.hasMany(Flight);
 Flight.belongsTo(Airplane);
 
 module.exports = {
+    User,
     Passenger,
-    Purchase,
     Ticket,
     Airplane,
     Flight

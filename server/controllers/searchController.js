@@ -1,6 +1,4 @@
-const ApiError = require('../error/ApiError');
 const { Ticket } = require('../models/models');
-
 
 
 class SearchController {

@@ -1,9 +1,9 @@
 const Router = require('express')
 const  router = new Router 
-const searchController = require('../controllers/searchController')
+const fillingController = require('../controllers/fillingController')
 const authMiddleware = require('../middleware/authMiddleware')
 
 
-router.get('/', authMiddleware, searchController.getByCityAndDate)
+router.post('/', authMiddleware, fillingController.savePassengerData)
 
 module.exports = router
