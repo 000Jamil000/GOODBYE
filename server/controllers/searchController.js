@@ -3,13 +3,11 @@ const { Ticket, Flight } = require('../models/models');
 
 class SearchController {
 
-
-
+  
   async getTicketInfo(req, res) {
-    const { fromCity, toCity, departureDate } = req.query;
-
     try {
-
+      const { fromCity, toCity, departureDate, departureDateBack } = req.query;
+  
       const ticketInfo = await Ticket.findAll({
         attributes: ['seat_number', 'cost'],
         include: {
@@ -22,7 +20,30 @@ class SearchController {
           }
         }
       });
-      
+  
+      let ticketBackInfo;
+      if(departureDateBack){
+        ticketBackInfo = await Ticket.findAll({
+          attributes: ['seat_number', 'cost'],
+          include: {
+            model: Flight,
+            attributes: ['from_city', 'to_city', 'departure_date', 'departure_time'],
+            where: {
+              from_city: toCity,
+              to_city: fromCity,
+              departure_date: departureDateBack
+            }
+          }
+        });
+      }
+      const combinedInfo = {
+        ticketInfo: ticketInfo,
+        ticketBackInfo: ticketBackInfo
+      };
+      if(ticketBackInfo){
+        return res.json(combinedInfo);
+      }
+      else
       return res.json(ticketInfo);
     } catch (error) {
       console.error('Ошибка:', error);
@@ -30,8 +51,7 @@ class SearchController {
     }
   }
   
- 
-  
+
   async getDepartureCities(req, res) {
     try {
         const departureCities = await Ticket.findAll({
@@ -51,3 +71,5 @@ class SearchController {
 
 }
 module.exports = new SearchController();
+
+
