@@ -16,12 +16,9 @@ const User = sequelize.define('User',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    role: {
-        type: DataTypes.STRING, 
-        defaultValue: "USER"
-    },
-})
-
+}, {
+    timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
+});
 const Passenger = sequelize.define('passenger', {
     id: {
         type: DataTypes.INTEGER,
@@ -62,10 +59,7 @@ const Ticket = sequelize.define('ticket', {
         primaryKey: true, 
         autoIncrement: true 
     },
-    flight_number: { 
-        type: DataTypes.STRING,
-        unique: true 
-    },
+
     seat_number: { 
         type: DataTypes.STRING,
         unique: true,
@@ -74,31 +68,18 @@ const Ticket = sequelize.define('ticket', {
     cost: { 
         type: DataTypes.FLOAT 
     },
-    airplane_number: { 
-        type: DataTypes.STRING, 
-        unique: true
-    },
-    from_city: { 
-        type: DataTypes.STRING 
-    },
-    to_city: { 
-        type: DataTypes.STRING 
-    },
-    departure_date: { 
-        type: DataTypes.DATE 
-    },
-    departure_time: { 
-        type: DataTypes.TIME 
-    },
     passenger_id: {
         type: DataTypes.INTEGER,
 
         references: {
           model: Passenger, // Имя связываемой таблицы
           key: 'id', // Поле в связываемой таблице
-        },
-    }
-    
+        }
+    },
+    flight_number: { 
+        type: DataTypes.STRING, 
+        unique: true 
+    },
 }, {
     timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
 });
@@ -190,34 +171,41 @@ const Flight = sequelize.define('flight', {
         primaryKey: true,
         unique: true 
     },
-    departure_date_time: { 
-        type: DataTypes.DATE 
+    time_race: {
+        type: DataTypes.TIME
     },
-    departure_place: { 
+    from_city: { 
         type: DataTypes.STRING 
     },
-    airplane_number: { 
-        type: DataTypes.STRING,
-        unique: true 
-    }
+    to_city: { 
+        type: DataTypes.STRING 
+    },
+    departure_date: { 
+        type: DataTypes.DATE 
+    },
+    departure_time: { 
+        type: DataTypes.TIME 
+    },  
 }, {
     timestamps: false 
 });
 
-Ticket.belongsTo(Passenger, {
-    foreignKey: 'passenegr_id', 
-    as: 'passenger', 
-  });
+// Ticket.belongsTo(Passenger, {
+//     foreignKey: 'passenegr_id', 
+//     as: 'passenger', 
+//   });
   
 Passenger.belongsTo(User, { foreignKey: 'userId' }); 
 User.hasOne(Passenger, { foreignKey: 'userId' });
 
-Ticket.belongsTo(Flight);
-Flight.hasMany(Ticket);
+Ticket.belongsTo(Flight, {
+    foreignKey: 'flight_number',
+    targetKey: 'flight_number' 
+  });
 
 // Билет <-> Самолет (один ко многим)
-Airplane.hasMany(Ticket);
-Ticket.belongsTo(Airplane);
+// Airplane.hasMany(Ticket);
+// Ticket.belongsTo(Airplane);
 
 // Самолет <-> Рейс (один ко многим)
 Airplane.hasMany(Flight);

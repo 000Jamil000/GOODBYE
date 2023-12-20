@@ -3,6 +3,7 @@ import Select from "react-select";
 import logo from '../assets/white-airplane.png';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import { useNavigate } from 'react-router-dom';
 
 function convertDate(dateStr) {
     const date = new Date(dateStr);
@@ -14,9 +15,7 @@ function convertDate(dateStr) {
 
 function Form(props) {
     const { setTickets, switchToTicketsTab } = props;
-
-    // const [cityFrom, setCityFrom] = useState('');
-    // const [cityTo, setCityTo] = useState('');
+    const navigate = useNavigate();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [cityOptions, setCityOptions] = useState([]);
@@ -54,7 +53,10 @@ function Form(props) {
             console.log('Билет туда:', ticketResponse);
             console.log('Обратный билет:', returnTicketResponse);
             setTickets([ticketResponse, returnTicketResponse]);
-            switchToTicketsTab();
+            navigate('/tickets', {   state: { 
+                ticketResponse, 
+                returnTicketResponse 
+            }  });
         })
         .catch((error) => {
             console.error('Ошибка:', error);
@@ -129,6 +131,7 @@ function Form(props) {
                         className="datePicker"
                     />
                 </div>
+              
                 <button type="submit" className="submitButton" >
                     Найти билеты
                 </button>

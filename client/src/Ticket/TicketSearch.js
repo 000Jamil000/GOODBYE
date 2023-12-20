@@ -31,7 +31,7 @@ const TicketSearch = () => {
           path="/form"
           element={
             isAuthenticated ? (
-              <Form setTickets={updateTickets} />
+              <Form setTickets={updateTickets} switchToTicketsTab={() => ('/tickets')} />
             ) : (
               <Navigate to="/" />
             )
