@@ -1,10 +1,10 @@
 const Router = require('express')
 const  router = new Router 
-const getInfo = require('../controllers/getInfoController')
+const ticketController = require('../controllers/ticketController')
 const authMiddleware = require('../middleware/authMiddleware')
 
 
-router.get('/', getInfo.infoAboutPassenger)
+router.post('/', authMiddleware, ticketController.buyTicket)
 
 
 module.exports = router

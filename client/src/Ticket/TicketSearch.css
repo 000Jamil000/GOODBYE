@@ -1,78 +1,85 @@
-body {
-    overflow: hidden;
-    margin:auto;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
 
-    width:100%;
-    padding:0px;
-  }
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #141414; /* Задайте цвет фона, который вы хотите использовать */
+}
 
 .container {
-    background-color: #141414;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    border: none;
-    margin: 0;
-    
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #141414;
+  color: white;
   
-.inputField {
-    margin: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 200px;
-    color: #333;
-  }
-  
-.datePickerContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 400px;
-    margin-bottom: 10px;
-  }
-  
-.datePicker {
-    margin: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 200px;
-    color: #333;
-  }
-  
-.submitButton {
-    font-family: Roboto;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-  }
-  
-.submitButton:hover {
-    background-color: #0056b3;
-  }
+}
 
-  .logo {
-    position: absolute;
-    top: 10px; 
-    left: 10px; 
-    width: 50px;
-  }
-  .text{
-    position: absolute;
-    top: 10px; 
-    left: 70px; 
-    font-family: Sofia Sans;
-    font-size: 10px;
-    font-weight: 300;
-  }
+.inputFieldsContainer {
+  display: flex;
+  align-items: center;
+  width: 110%;
+}
+
+.inputField {
+  margin: 10px;
+  width: 200px;
+  color: #333;
+}
+
+.datePickerContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.datePicker {
+  margin: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  color: #333;
+}
+
+.submitButton {
+  font-family: Roboto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.logo {
+  position: absolute;
+  top: 15px; 
+  left: 10px; 
+  width: 40px;
+}
+.text{
+  position: absolute;
+  top: 10px; 
+  left: 30px; 
+  font-family: Sofia Sans;
+  font-size: 30px;
+  font-weight: 300;
+}

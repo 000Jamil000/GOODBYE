@@ -42,19 +42,19 @@ class userController {
 }
 
     async login(req, res, next) {
-        const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
+        const { email, password } = req.body;
+        const user = await User.findOne({ where: { email } });
         if (!user) {
-            return next(ApiError.internal('Пользователь не найден'))
+        return res.json({ success: false, message: 'Пользователь не найден' });
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
+        let comparePassword = bcrypt.compareSync(password, user.password);
         if (!comparePassword) {
-            return next(ApiError.internal('Указан неверный пароль'))
+        return res.json({ success: false, message: 'Указан неверный пароль' });
         }
-        const token = generateJwt(user.id, user.email, user.role)
-        console.log(req.user)
-        return res.json({token})
+        const token = generateJwt(user.id, user.email, user.role);
+        return res.json({ success: true, token });
     }
+  
 
     async check(req, res) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)

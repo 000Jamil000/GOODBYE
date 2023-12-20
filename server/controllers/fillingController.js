@@ -1,10 +1,10 @@
-const { Passenger, User} = require('../models/models');
-const user = new User();
+const { Passenger} = require('../models/models');
+
 
 
 class fillingController {
   async savePassengerData(req, res) {
-    const { fullName, passportData, userId } = req.body;
+    const { fullName, passportData} = req.body;
     
     try {
 

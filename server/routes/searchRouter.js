@@ -1,9 +1,15 @@
-const Router = require('express')
-const  router = new Router 
-const searchController = require('../controllers/searchController')
-const authMiddleware = require('../middleware/authMiddleware')
+const Router = require('express');
+const router = new Router();
+const searchController = require('../controllers/searchController');
 
 
-router.get('/', authMiddleware, searchController.getByCityAndDate)
+// Роут для поиска билетов в одну сторону
+router.get('/one-way', searchController.getTicketByParams);
 
-module.exports = router
+// Роут для поиска билетов туда и обратно
+router.get('/round-trip', searchController.getReturnTicketByParams);
+
+// Роут для получения списка городов вылета
+router.get('/departure-cities', searchController.getDepartureCities);
+
+module.exports = router;

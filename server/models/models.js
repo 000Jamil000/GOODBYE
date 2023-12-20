@@ -32,16 +32,16 @@ const Passenger = sequelize.define('passenger', {
 
     full_name: {
         type: DataTypes.STRING,
-        allowNull: true 
+        allowNull: false
     },
     passport_data: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: true 
+        allowNull: false
     },
     dateOfBirth: {
         type: DataTypes.DATEONLY, // Используем DATEONLY для хранения только даты без времени
-        allowNull: true
+        allowNull: false
     },
     userId: {
         type: DataTypes.INTEGER,
@@ -87,19 +87,7 @@ const Ticket = sequelize.define('ticket', {
     departure_date: { 
         type: DataTypes.DATE 
     },
-    arrival_date: { 
-        type: DataTypes.DATE 
-    },
     departure_time: { 
-        type: DataTypes.TIME 
-    },
-    arrival_time: { 
-        type: DataTypes.TIME 
-    },
-    departure_time_back: { 
-        type: DataTypes.TIME 
-    },  
-    arrival_time_back: { 
         type: DataTypes.TIME 
     },
     passenger_id: {
@@ -117,16 +105,11 @@ const Ticket = sequelize.define('ticket', {
 
 
 
-
 // const Ticket = sequelize.define('ticket', {
 //     id: { 
 //         type: DataTypes.INTEGER, 
 //         primaryKey: true, 
 //         autoIncrement: true 
-//     },
-//     member_id: { 
-//         type: DataTypes.STRING,
-//         unique: true
 //     },
 //     flight_number: { 
 //         type: DataTypes.STRING,
@@ -143,7 +126,40 @@ const Ticket = sequelize.define('ticket', {
 //     airplane_number: { 
 //         type: DataTypes.STRING, 
 //         unique: true
+//     },
+//     from_city: { 
+//         type: DataTypes.STRING 
+//     },
+//     to_city: { 
+//         type: DataTypes.STRING 
+//     },
+//     departure_date: { 
+//         type: DataTypes.DATE 
+//     },
+//     arrival_date: { 
+//         type: DataTypes.DATE 
+//     },
+//     departure_time: { 
+//         type: DataTypes.TIME 
+//     },
+//     arrival_time: { 
+//         type: DataTypes.TIME 
+//     },
+//     departure_time_back: { 
+//         type: DataTypes.TIME 
+//     },  
+//     arrival_time_back: { 
+//         type: DataTypes.TIME 
+//     },
+//     passenger_id: {
+//         type: DataTypes.INTEGER,
+
+//         references: {
+//           model: Passenger, // Имя связываемой таблицы
+//           key: 'id', // Поле в связываемой таблице
+//         },
 //     }
+    
 // }, {
 //     timestamps: false // Отключение автоматически добавляемых createdAt и updatedAt
 // });

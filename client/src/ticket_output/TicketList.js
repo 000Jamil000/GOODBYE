@@ -103,31 +103,3 @@ class TicketList extends React.Component {
 }
 
 export default TicketList;
-
-
-
-/* <div className={styles.container}>
-
-<div className={styles.content}>
-<h2>Список билетов</h2>
-{hasTickets ? (
-  <ul>
-    {tickets.map((ticket, index) => (
-      <li key={index}>
-        <p>{ticket.from_city} - {ticket.to_city}</p>
-        <p>Дата отправления: {convertDate(ticket.departure_date)}</p>
-        <p>Время вылета: {ticket.departure_time}</p>
-        <p>Время прибытия: {ticket.arrival_time}</p>
-      </li>
-    ))}
-  </ul>
-) : (
-  <p>Нет доступных билетов</p>
-)}
-<button onClick={switchToForm}>
-  Вернуться к форме
-</button>
-</div>
-</div> */
-
-
