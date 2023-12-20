@@ -1,13 +1,14 @@
 
 const { Ticket, Flight } = require('../models/models');
-const sequelize = require('../db');
 
 class SearchController {
 
 
+
   async getTicketInfo(req, res) {
+    const { fromCity, toCity, departureDate } = req.query;
+
     try {
-      const { fromCity, toCity, departureDate } = req.query;
 
       const ticketInfo = await Ticket.findAll({
         attributes: ['seat_number', 'cost'],
